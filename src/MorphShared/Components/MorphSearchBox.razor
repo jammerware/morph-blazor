@@ -41,9 +41,6 @@
 
         // update the help text every five seconds
         var updateHelpTextTimer = new Timer(UpdateHelpText, null, 0, 5000);
-        //updateHelpTextTimer.Elapsed += UpdateHelpText;
-        //updateHelpTextTimer.Interval = 5000;
-        //updateHelpTextTimer.Enabled = true;
 
         // force button disabled
         StateHasChanged();
@@ -60,7 +57,6 @@
     private void OnTextChanged(string text)
     {
         this.IsQueryValid = (this.Query?.Length ?? 0) >= MIN_QUERY_LENGTH;
-
     }
 
     private async Task OnButtonClick()
@@ -70,18 +66,23 @@
 
     private async Task RaiseSearchEvent()
     {
+        System.Diagnostics.Debug.WriteLine("raise with query " + this.Query);
         await this.OnSearch.InvokeAsync(this.Query);
     }
 
-    private void UpdateHelpText(object? state) 
+    private async void UpdateHelpText(object? state) 
     {
-        var term = "Learn";
+        await InvokeAsync(() =>
+        {
+            var term = "learn";
 
-        if (this.RecommendedSearchTerms?.Length > 0) {
-            term = this.RecommendedSearchTerms[Random.Shared.Next(this.RecommendedSearchTerms.Length - 1)];
-        }
+            if (this.RecommendedSearchTerms?.Length > 0)
+            {
+                term = this.RecommendedSearchTerms[Random.Shared.Next(this.RecommendedSearchTerms.Length - 1)];
+            }
 
-        this.HelpText = $"Try \"{term}\"";
-        StateHasChanged();
+            this.HelpText = $"Try \"{term}\"";
+            StateHasChanged();
+        });
     }
 }

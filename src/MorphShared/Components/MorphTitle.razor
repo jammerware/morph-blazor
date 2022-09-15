@@ -1,0 +1,12 @@
+﻿<div class="app-title-wrap">
+    <h1 class="app-title">Morph</h1>
+    <p class="alpha-note">[ <strong>alpha</strong> @Version ]</p>
+</div>
+
+@code {
+    [Parameter]
+    public string? Version { get; set; }
+
+    [Parameter]
+    public bool IsAlpha { get; set; } = true;
+}

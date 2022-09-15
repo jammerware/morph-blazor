@@ -1,0 +1,19 @@
+﻿h1.app-title {
+    font-family: 'Passion One', 'Segoe UI', sans-serif;
+    font-size: 4rem;
+    height: 3rem;
+    text-transform: lowercase;
+    text-decoration: none;
+}
+
+.app-title-wrap {
+    align-items: baseline;
+    margin-bottom: 12px;
+    display: flex;
+}
+
+.alpha-note {
+    font-weight: lighter;
+    margin-left: 4px;
+    text-transform: uppercase;
+}

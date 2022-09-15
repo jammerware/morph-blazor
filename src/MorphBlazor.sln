@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorphShared", "MorphShared\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorphWasm", "MorphWasm\MorphWasm.csproj", "{2C57613C-0332-4CA1-A3B9-C776DB27D66D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorphMaui", "MorphMaui\MorphMaui.csproj", "{7820DB7A-3B31-4232-823F-176FE5B3F948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{2C57613C-0332-4CA1-A3B9-C776DB27D66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C57613C-0332-4CA1-A3B9-C776DB27D66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C57613C-0332-4CA1-A3B9-C776DB27D66D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7820DB7A-3B31-4232-823F-176FE5B3F948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7820DB7A-3B31-4232-823F-176FE5B3F948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7820DB7A-3B31-4232-823F-176FE5B3F948}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7820DB7A-3B31-4232-823F-176FE5B3F948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7820DB7A-3B31-4232-823F-176FE5B3F948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7820DB7A-3B31-4232-823F-176FE5B3F948}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

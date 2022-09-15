@@ -8,16 +8,18 @@
 
 <PageTitle>Morph</PageTitle>
 
-<div class="app-title-wrap">
-    <h1 class="app-title">Morph</h1>
-    <p class="alpha-note">[ <strong>alpha</strong> @(AppVersion?.ToString()) ]</p>
-</div>
+<MorphTitle Version="AppVersion" />
 
 <MorphSearchBox OnSearch="OnSearch" />
 
-@code {
+    @code {
+        private string? AppVersion { get; set; }
     private string? Query { get; set; }
-    private Version? AppVersion { get; set; } = typeof(Index).Assembly.GetName().Version;
+
+    protected override void OnInitialized()
+    {
+        this.AppVersion = typeof(Index).Assembly.GetName().Version?.ToString();
+    }
 
     private void OnSearch(string query)
     {

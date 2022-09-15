@@ -1,0 +1,23 @@
+﻿@page "/"
+
+@using MorphShared.Components
+
+<MorphTitle Version="@AppVersion" />
+
+<MorphSearchBox OnSearch="OnSearch" />
+
+<p>@Query</p>
+
+@code {
+    private string AppVersion { get; set; }
+    private string Query { get; set; }
+
+    protected override void OnInitialized()
+    {
+        this.AppVersion = AppInfo.Current.VersionString;
+    }
+
+    private void OnSearch(string query) {
+        this.Query = query;
+    }
+}
