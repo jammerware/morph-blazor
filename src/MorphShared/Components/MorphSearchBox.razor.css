@@ -1,0 +1,14 @@
+.search-box-component {
+    display: flex;
+    width: 100%;
+}
+
+::deep .search-box input {
+    font-size: 3rem;
+}
+
+::deep .search-button {
+    margin-left: 1rem;
+    height: 90px;
+    width: 4rem;
+}

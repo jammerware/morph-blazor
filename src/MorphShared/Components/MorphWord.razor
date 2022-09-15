@@ -1,0 +1,59 @@
+﻿@using MorphShared.Models
+@using MorphShared.Services
+@using MudBlazor
+
+@inject IApiService Api
+
+<PageTitle>@Word | Morph</PageTitle>
+
+<div class="word-component">
+    @if (Decomposition == null)
+    {
+        <div class="loading">
+            <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+
+            <p>Looking up <strong>Word</strong>...</p>
+            <p class="heroku-note">
+                Don't worry if this takes awhile. Morph is (gratefully) hosted on free servers at
+                <a href="https://heroku.com" target="_blank" class="text-link">Heroku</a>. The downside of this is that the app goes
+                to sleep if it isn't used for awhile, so it takes it a bit to wake up. If you look up more words in the next
+                15 minutes or so, Morph will be much faster 👍🏻
+            </p>
+        </div>
+    }
+    else {
+        <div>
+            <div class="header-wrap">
+                <h2 class="page-title">
+                    <span class="word">@Decomposition.L1.ToLower()</span>
+                    <span class="pinyin">(@Decomposition.Pinyin)</span>
+                </h2>
+            </div>
+        </div>
+
+        <MudDivider />
+        <div class="character-decompositions">
+            @foreach (var character in Decomposition.Characters)
+            {
+                <MorphCharacterCard Decomposition="character" />
+            }
+        </div>
+        <MudDivider />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string? Word { get; set; }
+    private WordDecomposition? Decomposition { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        if (Word == null) {
+            throw new ArgumentException($"{nameof(MorphWord)} requires a word argument.");
+        }
+
+        this.Decomposition = await this.Api.GetWordDecomposition(Word);
+        StateHasChanged();
+    }
+}

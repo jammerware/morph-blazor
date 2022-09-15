@@ -1,0 +1,87 @@
+﻿@using System.Threading
+@using MudBlazor
+@using MorphShared.Services
+@inject IApiService Api
+
+<div class="search-box-component">
+    <MudTextField 
+        Class="search-box"
+        AutoFocus="true"
+        Variant="Variant.Text"
+        @bind-Value="Query" 
+        @bind-Label="HelpText"
+        TextChanged="OnTextChanged"
+        @onkeyup="OnKeyUp" />
+
+    <MudIconButton 
+        Class="search-button" 
+        Icon="@Icons.Material.Filled.Search" 
+        Color="Color.Primary" 
+        Variant="Variant.Filled" 
+        Size="Size.Large"
+        @onclick="OnButtonClick"
+        Disabled="!IsQueryValid" />
+
+</div>
+
+@code {
+    public string HelpText { get; set; } = "Try \"learn\"";
+    public string? Query { get; set; }
+
+    private bool IsQueryValid { get; set; } = false;
+    private string[]? RecommendedSearchTerms { get; set; }
+    private const int MIN_QUERY_LENGTH = 2;
+
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.RecommendedSearchTerms = await Api.GetRecommendedSearchTerms();
+
+        // update the help text every five seconds
+        var updateHelpTextTimer = new Timer(UpdateHelpText, null, 0, 5000);
+        //updateHelpTextTimer.Elapsed += UpdateHelpText;
+        //updateHelpTextTimer.Interval = 5000;
+        //updateHelpTextTimer.Enabled = true;
+
+        // force button disabled
+        StateHasChanged();
+    }
+
+    private async Task OnKeyUp(KeyboardEventArgs e) 
+    {
+        if (e.Key == "Enter" && this.Query != null && this.IsQueryValid)
+        {
+            await this.RaiseSearchEvent();
+        }
+    }
+
+    private void OnTextChanged(string text)
+    {
+        this.IsQueryValid = (this.Query?.Length ?? 0) >= MIN_QUERY_LENGTH;
+
+    }
+
+    private async Task OnButtonClick()
+    {
+        await this.RaiseSearchEvent();
+    }
+
+    private async Task RaiseSearchEvent()
+    {
+        await this.OnSearch.InvokeAsync(this.Query);
+    }
+
+    private void UpdateHelpText(object? state) 
+    {
+        var term = "Learn";
+
+        if (this.RecommendedSearchTerms?.Length > 0) {
+            term = this.RecommendedSearchTerms[Random.Shared.Next(this.RecommendedSearchTerms.Length - 1)];
+        }
+
+        this.HelpText = $"Try \"{term}\"";
+        StateHasChanged();
+    }
+}

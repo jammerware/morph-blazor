@@ -1,0 +1,38 @@
+﻿.character-card-component {
+    display: flex;
+    min-width: 200px;
+}
+
+.content-wrap {
+    margin: 0 auto;
+}
+
+.character-big {
+    display: block;
+    font-size: 6rem;
+    line-height: 6.5rem;
+    text-align: center;
+}
+
+.character-pinyin {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.definitions {
+    text-transform: uppercase;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+li
+{
+    font-weight: bolder;
+    margin-right: 1rem;
+}
+

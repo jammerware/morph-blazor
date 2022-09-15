@@ -1,0 +1,44 @@
+﻿@using MorphShared.Models
+@using MorphShared.Services
+@inject FrequencyRankService FreqRankService
+
+<div class="character-card-component">
+    @if (Decomposition != null)
+    {
+        <div class="content-wrap">
+            <a>
+                <p class="character-big chinese">
+                    @Decomposition.Character
+                </p>
+                <p class="character-pinyin">@Decomposition.Pinyin</p>
+            </a>
+            <div class="definitions">
+                <ul>
+                    @foreach (var definition in Decomposition.Definitions) {
+                        <li>@definition</li>
+                    }
+                </ul>
+            </div>
+
+            <ul>
+                <li><strong>@Decomposition.FreqRank@(FrequencyRankSuffix)</strong> most common character</li>
+                <li><strong>@Decomposition.StrokeCount</strong> strokes</li>
+            </ul>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public CharacterDecomposition? Decomposition { get; set; }
+    private string FrequencyRankSuffix { get; set; } = "th";
+
+    protected override void OnInitialized()
+    {
+        if (Decomposition == null) {
+            throw new ArgumentException($"{nameof(MorphCharacterCard)} requires a CharacterDecomposition parameter.");
+        }
+
+        this.FrequencyRankSuffix = this.FreqRankService.GetFrequencyRankSuffix(Decomposition.FreqRank);
+    }
+}

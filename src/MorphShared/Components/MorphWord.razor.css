@@ -1,0 +1,89 @@
+﻿.loading {
+    padding: 1rem 0 0 0;
+}
+
+.loading p {
+    padding: 1rem 0 0 0;
+    text-align: center;
+}
+
+.heroku-note {
+    font-style: italic;
+}
+
+.heroku-note a {
+    font-weight: bold;
+}
+
+.header-wrap {
+    display: flex;
+    align-items: center;
+
+    /*@media only screen and (min-width: $mobile-breakpoint) {
+        margin: 2rem 0;
+
+        .page-title {
+            display: flex;
+            flex-wrap: wrap;
+    
+            .pinyin {
+                margin-left: 1.2rem;
+            }
+        }
+    }
+
+    @media only screen and(max-width: $mobile-breakpoint) {
+        margin: 1.5rem 0 1rem 0;
+
+        .page-title {
+            display: block;
+            
+            .pinyin {
+                font-size: 2rem;
+                line-height: 3.5rem;
+            }
+        }
+    }*/
+}
+
+.pinyin {
+    color: red;
+    font-weight: normal;
+}
+
+.search-button {
+    margin-right: 1rem;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.search-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+}
+
+.character-decompositions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 1rem 0 1.5rem;
+}
+
+app-character-card {
+    display: block;
+    flex-grow: 1;
+}
+
+.button-divider {
+    margin: 1rem 0;
+}
+
+.button-wrap {
+    display: flex;
+    padding-bottom: 1rem;
+    justify-content: flex-end;
+}

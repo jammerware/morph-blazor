@@ -1,0 +1,27 @@
+﻿@using System.Reflection
+@using MorphWasm
+@using MorphShared.Components
+
+@inject NavigationManager NavigationManager
+
+@page "/"
+
+<PageTitle>Morph</PageTitle>
+
+<div class="app-title-wrap">
+    <h1 class="app-title">Morph</h1>
+    <p class="alpha-note">[ <strong>alpha</strong> @(AppVersion?.ToString()) ]</p>
+</div>
+
+<MorphSearchBox OnSearch="OnSearch" />
+
+@code {
+    private string? Query { get; set; }
+    private Version? AppVersion { get; set; } = typeof(Index).Assembly.GetName().Version;
+
+    private void OnSearch(string query)
+    {
+        this.Query = query;
+        this.NavigationManager.NavigateTo($"/word/{query}");
+    }
+}
