@@ -1,0 +1,20 @@
+﻿.morph-loading-component {
+    padding: 1rem 0 0 0;
+}
+
+.info {
+    padding-top: 0.5rem;
+}
+
+.operation-description, .details {
+    padding: 1rem 0 0 0;
+    text-align: center;
+}
+
+.details {
+    font-style: italic;
+}
+
+.details a {
+    font-weight: bold;
+}

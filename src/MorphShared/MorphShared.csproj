@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <None Remove="Components\MorphCharacter.razor.css" />
+    <None Remove="Components\MorphLoading.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Components\MorphCharacter.razor.css" />
+    <Content Include="Components\MorphLoading.razor.css" />
   </ItemGroup>
 
   <ItemGroup>

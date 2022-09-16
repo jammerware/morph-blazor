@@ -5,7 +5,14 @@
 @inject FrequencyRankService FrequencyRankService
 
 <div class="character-component">
-    @if (Character != null)
+    @if (Character == null) {
+        <MorphLoading>
+            <OperationDescription>
+                <p>Looking up <strong>@CharacterParameter?</strong>...</p>
+            </OperationDescription>
+        </MorphLoading>
+    }
+    else
     {
         <div class="character-wrap">
             <div class="character-and-pinyin">
@@ -34,7 +41,7 @@
                                 @foreach (var word in CommonWords.Translations)
                                 {
                                     <MudChip Variant="Variant.Text" Color="Color.Default" Class="cursor-pointer">
-                                        <a href=@($"/word/{word.Translation}")>@word.Translation (@word.L1)</a>
+                                        <a href=@($"/word/{word.Translation}")>@word.Translation (@word.L1?.ToLower())</a>
                                     </MudChip>
                                 }
                             </div>

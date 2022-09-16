@@ -1,0 +1,21 @@
+﻿<div class="morph-loading-component">
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+
+    <div class="info">
+        <p class="operation-description">@OperationDescription</p>
+        @if (Details != null)
+        {
+            <p class="details">
+                @Details
+            </p>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? Details { get; set; }
+
+    [Parameter]
+    public RenderFragment? OperationDescription { get; set; }
+}
