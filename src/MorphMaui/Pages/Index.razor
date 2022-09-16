@@ -2,6 +2,8 @@
 
 @using MorphShared.Components
 
+@inject NavigationManager NavigationManager
+
 <MorphSearchBox OnSearch="OnSearch" />
 
 <p>@Query</p>
@@ -12,5 +14,9 @@
 
     private void OnSearch(string query) {
         this.Query = query;
+
+        if (query != null) {
+            this.NavigationManager.NavigateTo($"/word/{query.Trim().ToLower()}");
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using MorphMaui.Data;
-using MorphMaui.Services;
+﻿using MorphMaui.Services;
 using MorphShared;
 using MudBlazor.Services;
 
@@ -31,8 +30,6 @@ namespace MorphMaui
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-
-            builder.Services.AddSingleton<WeatherForecastService>();
 
             return builder.Build();
         }

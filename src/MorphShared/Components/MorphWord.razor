@@ -24,13 +24,21 @@
             <div class="header-wrap">
                 <div class="search-button-wrap">
                     <a href="/">
-                        <MudIconButton Icon="@Icons.Material.Filled.Search" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" />
+                        <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                            <MudIconButton Icon="@Icons.Material.Filled.Search" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" />
+                        </MudHidden>
+                        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+                            <MudIconButton Icon="@Icons.Material.Filled.Search" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium" />
+                        </MudHidden>
                     </a>
                 </div>
-                <MorphPageTitle>
-                    <span class="word">@Decomposition.Word?.L1?.ToLower()</span>
-                    <span class="pinyin">(@Decomposition.Word?.Pinyin)</span>
-                </MorphPageTitle>
+
+                <div class="title-wrap">
+                    <MorphPageTitle>
+                        <span class="word">@Decomposition.Word?.L1?.ToLower()</span>
+                        <span class="pinyin">(@Decomposition.Word?.Pinyin)</span>
+                    </MorphPageTitle>
+                </div>
             </div>
         </div>
 
@@ -45,6 +53,10 @@
             </div>
         }
         <MudDivider />
+        
+        <div class="button-wrap">
+            <MudIconButton Icon="@Icons.Material.Filled.Share" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" />
+        </div>
     }
 </div>
 

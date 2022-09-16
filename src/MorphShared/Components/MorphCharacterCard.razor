@@ -10,12 +10,12 @@
         <a href="@($"/character/{Decomposition.Character}")">
             <MudCard Class="content-wrap cursor-pointer">
                 <MudCardContent>
-                    <a>
+                    <div class="character-and-pinyin">
                         <p class="character-big chinese">
                             @Decomposition.Character
                         </p>
-                        <p class="character-pinyin">@Decomposition.Pinyin</p>
-                    </a>
+                        <p class="pinyin">@Decomposition.Pinyin</p>
+                    </div>
                     <div class="definitions">
                         <ul>
                             @foreach (var definition in Decomposition.Definitions)

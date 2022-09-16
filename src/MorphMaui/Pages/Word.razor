@@ -1,0 +1,10 @@
+﻿@using MorphShared.Components
+
+@page "/word/{wordParameter}"
+
+<MorphWord Word="@WordParameter" />
+
+@code {
+    [Parameter]
+    public string WordParameter { get; set; }
+}

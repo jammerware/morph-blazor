@@ -18,31 +18,17 @@
     font-weight: normal;
 }
 
-.search-button {
-    margin-right: 1rem;
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-}
-
-.search-icon {
-    font-size: 36px;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-}
-
 .character-decompositions {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    gap: 12px;
     margin: 1rem 0 1.5rem;
 }
 
-app-character-card {
-    display: block;
-    flex-grow: 1;
+::deep .character-decompositions .mud-paper {
+    width: 100%;
 }
 
 .button-divider {
@@ -51,6 +37,22 @@ app-character-card {
 
 .button-wrap {
     display: flex;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
     justify-content: flex-end;
+}
+
+@media only screen and (max-width: 600px) {
+    .search-button-wrap {
+        padding: 0;
+        width: 3.5rem;
+    }
+
+    .word, .pinyin {
+        display: block;
+        line-height: 2.5rem;
+    }
+
+    .title-wrap {
+        margin-bottom: 1.2rem;
+    }
 }

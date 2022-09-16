@@ -1,4 +1,4 @@
 ﻿body {
     background: url('../_content/MorphShared/background.jpg') center content-box content-box fixed;
-    font-family: "Roboto", "Helvetica Neue", sans-serif;
+    font-family: var(--mud-typography-default-family);
 }

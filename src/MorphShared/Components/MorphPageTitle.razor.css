@@ -1,4 +1,10 @@
 ﻿.morph-page-title {
-    font-size: 4rem !important;
-    font-weight: bolder !important;
+    font-size: 4rem;
+    font-weight: bolder;
+}
+
+@media only screen and (max-width: 600px) {
+    .morph-page-title {
+        font-size: 2.3rem;
+    }
 }

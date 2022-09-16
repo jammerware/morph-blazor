@@ -11,23 +11,8 @@
     padding: 0 4rem;
 }
 
-.character-pinyin {
-    font-size: 2rem;
-}
-
-@media only screen and (max-width: 600px) {
-    .big-character {
-        font-size: 4rem;
-        line-height: 4rem;
-    }
-
-    .character-and-pinyin {
-        padding: 0 2rem;
-    }
-
-    .character-pinyin {
-        font-size: 1.4rem;
-    }
+.pinyin {
+    font-size: 2.2rem;
 }
 
 .big-character {
@@ -49,7 +34,7 @@ li {
     margin-right: 2rem;
 }
 
-.fact-list li:not(:last-of-type) {
+.fact-list > li:not(:last-of-type) {
     margin-bottom: 2rem;
 }
 
@@ -64,4 +49,27 @@ li {
 
 .fact-data.common-words {
     font-weight: 500;
+}
+
+@media only screen and (max-width: 600px) {
+    .character-wrap {
+        flex-direction: column;
+    }
+
+    .character-and-pinyin {
+        margin-bottom: 2rem;
+    }
+
+    .big-character {
+        font-size: 6rem;
+        line-height: 6rem;
+    }
+
+    .character-and-pinyin {
+        padding: 0 2rem;
+    }
+
+    .pinyin {
+        font-size: 1.7rem;
+    }
 }
