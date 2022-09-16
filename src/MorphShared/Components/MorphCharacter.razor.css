@@ -49,7 +49,7 @@ li {
     margin-right: 2rem;
 }
 
-li:not(:last-of-type) {
+.fact-list li:not(:last-of-type) {
     margin-bottom: 2rem;
 }
 
@@ -60,4 +60,8 @@ li:not(:last-of-type) {
 
 .semantic-radical strong {
     margin-right: 4px;
+}
+
+.fact-data.common-words {
+    font-weight: bolder;
 }

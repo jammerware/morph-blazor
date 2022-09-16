@@ -23,8 +23,8 @@ namespace MorphShared.Services
         public async Task<string[]> GetRecommendedSearchTerms() =>
             await this.GetResponseContent<string[]>("recommended-search-terms");
 
-        public async Task<TranslationResult> translate(string[] queries) =>
-            await this.PostResponseContent<TranslationResult>("translate/all", new { text = queries });
+        public async Task<TranslationResults> Translate(string[] queries) =>
+            await this.PostResponseContent<TranslationResults>("translate/all", new { text = queries });
 
         private async Task<T> GetResponseContent<T>(string requestUri)
         {

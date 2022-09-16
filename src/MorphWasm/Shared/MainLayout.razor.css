@@ -1,5 +1,17 @@
-.app-wrap {
+.body-wrap {
     background-color: #fafafa;
-    border-radius: 4px;
+    border-radius: var(--mud-default-borderradius);
     padding: 16px;
+}
+
+/* This nonsense centers the app vertically/horizontally */
+.vertical-layout.morph-flex-parent {
+    flex-direction: column;
+    height: 100%;
+    padding-top: 2rem;
+    margin-bottom: 8rem;
+}
+
+.app-container {
+    flex-shrink: 1;
 }

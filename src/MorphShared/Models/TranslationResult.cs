@@ -2,7 +2,7 @@
 {
     public class TranslationResult
     {
-        public string TargetLanguage { get; set; }
-        public Translation[] Translations { get; set; }
+        public string? L1 { get; set; }
+        public string? Translation { get; set; }
     }
 }

@@ -7,30 +7,31 @@
 <div class="character-card-component">
     @if (Decomposition != null)
     {
-        <MudCard Class="content-wrap" @onclick="OnClick">
-            <MudCardContent>
-                <a>
-                    <p class="character-big chinese">
-                        @Decomposition.Character
-                    </p>
-                    <p class="character-pinyin">@Decomposition.Pinyin</p>
-                </a>
-                <div class="definitions">
-                    <ul>
-                        @foreach (var definition in Decomposition.Definitions)
-                        {
-                            <li>@definition</li>
-                        }
-                    </ul>
-                </div>
+        <a href="@($"/character/{Decomposition.Character}")">
+            <MudCard Class="content-wrap cursor-pointer">
+                <MudCardContent>
+                    <a>
+                        <p class="character-big chinese">
+                            @Decomposition.Character
+                        </p>
+                        <p class="character-pinyin">@Decomposition.Pinyin</p>
+                    </a>
+                    <div class="definitions">
+                        <ul>
+                            @foreach (var definition in Decomposition.Definitions)
+                            {
+                                <li>@definition</li>
+                            }
+                        </ul>
+                    </div>
 
-                <ul class="frequency-and-strokes">
-                    <li><strong>@Decomposition.FreqRank@(FrequencyRankSuffix)</strong> most common character</li>
-                    <li><strong>@Decomposition.StrokeCount</strong> strokes</li>
-                </ul>
-            </MudCardContent>
-        </MudCard>
-        
+                    <ul class="frequency-and-strokes">
+                        <li><strong>@Decomposition.FreqRank@(FrequencyRankSuffix)</strong> most common character</li>
+                        <li><strong>@Decomposition.StrokeCount</strong> strokes</li>
+                    </ul>
+                </MudCardContent>
+            </MudCard>
+        </a>
     }
 </div>
 
@@ -48,8 +49,8 @@
         this.FrequencyRankSuffix = this.FreqRankService.GetFrequencyRankSuffix(Decomposition.FreqRank);
     }
 
-    private void OnClick()
-    {
-        this.NavigationManager.NavigateTo($"/character/{Decomposition?.Character}");
-    }
+    //private void OnClick()
+    //{
+    //    this.NavigationManager.NavigateTo($"/character/{Decomposition?.Character}");
+    //}
 }

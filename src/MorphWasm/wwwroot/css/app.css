@@ -1,1 +1,17 @@
-﻿
+﻿html, body {
+    height: 100%;
+}
+
+#app {
+    height: 100%;
+}
+
+/* This stuff hacks MudLayout. Beware. */
+.mud-main-content > .mud-container {
+    height: 100%;
+}
+
+.mud-main-content {
+    padding-top: 0px;
+    height: 100%;
+}

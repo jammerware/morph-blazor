@@ -7,6 +7,6 @@ namespace MorphShared.Services
         Task<CharacterDecomposition?> GetCharacterDetails(string character);
         Task<string[]> GetRecommendedSearchTerms();
         Task<WordDecomposition> GetWordDecomposition(string query);
-        Task<TranslationResult> translate(string[] queries);
+        Task<TranslationResults> Translate(string[] queries);
     }
 }

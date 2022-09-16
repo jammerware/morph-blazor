@@ -24,6 +24,11 @@
     else {
         <div>
             <div class="header-wrap">
+                <div class="search-button-wrap">
+                    <a href="/">
+                        <MudIconButton Icon="@Icons.Material.Filled.Search" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" />
+                    </a>
+                </div>
                 <MorphPageTitle>
                     <span class="word">@Decomposition.Word?.L1?.ToLower()</span>
                     <span class="pinyin">(@Decomposition.Word?.Pinyin)</span>

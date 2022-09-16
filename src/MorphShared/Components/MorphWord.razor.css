@@ -46,6 +46,16 @@
     }*/
 }
 
+.search-button-wrap {
+    flex-shrink: 1;
+    padding-left: 1rem;
+    width: 5rem;
+}
+
+.morph-page-title {
+    flex-grow: 1;
+}
+
 .pinyin {
     color: var(--mud-palette-info-lighten);
     font-weight: normal;

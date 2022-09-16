@@ -1,0 +1,10 @@
+﻿footer {
+    color: var(--mud-palette-primary-text);
+    margin-top: 0.5rem;
+}
+
+a {
+    color: var(--mud-palette-primary-text);
+    font-weight: bold;
+    text-decoration: underline;
+}

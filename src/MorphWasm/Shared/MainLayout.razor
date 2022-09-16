@@ -8,9 +8,16 @@
 <MudLayout>
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.Medium">
-            <MorphAppTitle Version="@AppVersion" />
-            <div class="app-wrap">
-                @Body
+            <div class="morph-flex-parent vertical-layout">
+                <div class="morph-flex-child"></div>
+                <div class="app-container">
+                    <MorphAppTitle Version="@AppVersion" />
+                    <div class="body-wrap">
+                        @Body
+                    </div>
+                    <MorphAppFooter />
+                </div>
+                <div class="morph-flex-child"></div>
             </div>
         </MudContainer>
     </MudMainContent>

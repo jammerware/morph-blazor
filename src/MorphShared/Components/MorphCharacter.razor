@@ -26,13 +26,18 @@
                         </div>
                     </li>
 
-                    @if (Character.CommonWords != null && Character.CommonWords.Length > 0)
+                    @if (CommonWords != null)
                     {
                         <li>
                             <h1 class="fact-header">Common words</h1>
-                            @*<div class="fact-data">
-                                <app-character-common-words [words]="characterData.commonWords"></app-character-common-words>
-                            </div>*@
+                            <div class="fact-data common-words">
+                                @foreach (var word in CommonWords.Translations)
+                                {
+                                    <MudChip Variant="Variant.Text" Color="Color.Default" Class="cursor-pointer">
+                                        <a href=@($"/word/{word.Translation}")>@word.Translation (@word.L1)</a>
+                                    </MudChip>
+                                }
+                            </div>
                         </li>
                     }
                     
@@ -104,14 +109,21 @@
     public string CharacterParameter { get; set; } = "";
 
     private CharacterDecomposition? Character { get; set; }
+    private TranslationResults? CommonWords { get; set; }
     private string FrequencyRankSuffix { get; set; } = "th";
 
     protected override async Task OnParametersSetAsync()
     {
         this.Character = null;
+        this.CommonWords = null;
         StateHasChanged();
 
         this.Character = await this.Api.GetCharacterDetails(this.CharacterParameter.ToString());
         this.FrequencyRankSuffix = this.Character == null ? "th" : this.FrequencyRankService.GetFrequencyRankSuffix(this.Character.FreqRank);
+
+        if (this.Character != null && this.Character.CommonWords != null) {
+            var toTranslate = this.Character.CommonWords.Select(w => w.Word).ToArray();
+            this.CommonWords = await this.Api.Translate(this.Character.CommonWords.Select(w => w.Word).ToArray());
+        }
     }
 }
