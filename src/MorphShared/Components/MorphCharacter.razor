@@ -1,0 +1,117 @@
+﻿@using MorphShared.Models
+@using MorphShared.Services
+
+@inject IApiService Api
+@inject FrequencyRankService FrequencyRankService
+
+<div class="character-component">
+    @if (Character != null)
+    {
+        <div class="character-wrap">
+            <div class="character-and-pinyin">
+                <p class="big-character">@Character.Character</p>
+                <p class="character-pinyin">@Character.Pinyin</p>
+            </div>
+            <div class="other-info morph-flex-child">
+                <ul class="fact-list">
+                    <li>
+                        <h1 class="fact-header">Meanings</h1>
+                        <div>
+                            <ul class="flex-list">
+                                @foreach(var definition in Character.Definitions)
+                                {
+                                    <li>@definition</li>
+                                }
+                            </ul>
+                        </div>
+                    </li>
+
+                    @if (Character.CommonWords != null && Character.CommonWords.Length > 0)
+                    {
+                        <li>
+                            <h1 class="fact-header">Common words</h1>
+                            @*<div class="fact-data">
+                                <app-character-common-words [words]="characterData.commonWords"></app-character-common-words>
+                            </div>*@
+                        </li>
+                    }
+                    
+                    @if (Character.SemanticRadical != null)
+                    {
+                        <li>
+                            <h1 class="fact-header">Semantic radical</h1>
+                            <div class="semantic-radical fact-data">
+                                <strong>@(Character.SemanticRadical.Variant ?? Character.SemanticRadical.Radical)</strong>
+                                @if(Character.SemanticRadical.Variant != null)
+                                {
+                                    <span>>/ @Character.SemanticRadical.Radical</span>
+                                }
+
+                                @if (Character.SemanticRadical.Pinyin != null && Character.SemanticRadical.Translation != null)
+                                {
+                                    <span>(</span>
+                                }
+
+                                @if (Character.SemanticRadical.Pinyin != null)
+                                {
+                                    <span>@Character.SemanticRadical.Pinyin</span>
+                                }
+
+                                @if (Character.SemanticRadical.Translation != null)
+                                {
+                                    <span>, <em>@Character.SemanticRadical.Translation</em></span>
+                                }
+
+                                @if (Character.SemanticRadical.Pinyin != null && Character.SemanticRadical.Translation != null)
+                                {
+                                    <span>)</span>
+                                }
+                            </div>
+                        </li>
+                    }
+
+                    <li>
+                        <h1 class="fact-header">Stroke count</h1>
+                        <div class="fact-data">@Character.StrokeCount</div>
+                    </li>
+
+                    <li>
+                        <h1 class="fact-header">Frequency</h1>
+                        
+                        <div class="fact-data">@Character.FreqRank@(FrequencyRankSuffix)</div>
+                    </li>
+
+                    @if (Character.IsUnbound)
+                    {
+                        <li>
+                            <h1 class="fact-header">Special characteristics</h1>
+                            <div>
+                                Most characters in Chinese can represent a word by themselves, but
+                                <strong>@Character.Character</strong> can't (even though it does contribute
+                                one of its meanings above to the words it appears in).
+                                Characters like this are called <em>bound</em> characters.
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string CharacterParameter { get; set; } = "";
+
+    private CharacterDecomposition? Character { get; set; }
+    private string FrequencyRankSuffix { get; set; } = "th";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        this.Character = null;
+        StateHasChanged();
+
+        this.Character = await this.Api.GetCharacterDetails(this.CharacterParameter.ToString());
+        this.FrequencyRankSuffix = this.Character == null ? "th" : this.FrequencyRankService.GetFrequencyRankSuffix(this.Character.FreqRank);
+    }
+}

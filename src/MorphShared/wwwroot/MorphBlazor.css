@@ -1,0 +1,12 @@
+﻿body {
+    background: url('background.jpg') center content-box content-box fixed;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
+
+.morph-flex-parent {
+    display: flex;
+}
+
+.morph-flex-child {
+    flex-grow: 1;
+}

@@ -1,0 +1,10 @@
+﻿@using MorphShared.Components
+
+@page "/character/{characterParameter}"
+
+<MorphCharacter CharacterParameter="@CharacterParameter" />
+
+@code {
+    [Parameter]
+    public string? CharacterParameter { get; set; }
+}

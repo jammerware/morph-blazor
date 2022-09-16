@@ -5,6 +5,7 @@
 
 .content-wrap {
     margin: 0 auto;
+    padding: 1rem;
 }
 
 .character-big {
@@ -24,15 +25,14 @@
     text-transform: uppercase;
 }
 
-ul {
+.definitions ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-li
+.definitions li
 {
     font-weight: bolder;
     margin-right: 1rem;
 }
-

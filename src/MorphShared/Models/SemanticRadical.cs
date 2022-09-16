@@ -1,8 +1,8 @@
 ﻿namespace MorphShared.Models
 {
-    public class Radical
+    public class SemanticRadical
     {
-        public string UTF8 { get; set; }
+        public string Radical { get; set; }
         public int RadicalNo { get; set; }
         public string Pinyin { get; set; }
         public int StrokeCount { get; set; }

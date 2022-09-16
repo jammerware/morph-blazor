@@ -3,6 +3,6 @@
     public class WordFrequency
     {
         public string Word { get; set; }
-        public int Frequency { get; set; }
+        public double Frequency { get; set; }
     }
 }

@@ -4,7 +4,7 @@
 
 @inject IApiService Api
 
-<PageTitle>@Word | Morph</PageTitle>
+<PageTitle>@Decomposition?.Word?.L1 | Morph</PageTitle>
 
 <div class="word-component">
     @if (Decomposition == null)
@@ -12,7 +12,7 @@
         <div class="loading">
             <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
 
-            <p>Looking up <strong>Word</strong>...</p>
+            <p>Looking up <strong>@Word?.ToLower()</strong>...</p>
             <p class="heroku-note">
                 Don't worry if this takes awhile. Morph is (gratefully) hosted on free servers at
                 <a href="https://heroku.com" target="_blank" class="text-link">Heroku</a>. The downside of this is that the app goes
@@ -24,20 +24,23 @@
     else {
         <div>
             <div class="header-wrap">
-                <h2 class="page-title">
-                    <span class="word">@Decomposition.L1.ToLower()</span>
-                    <span class="pinyin">(@Decomposition.Pinyin)</span>
-                </h2>
+                <MorphPageTitle>
+                    <span class="word">@Decomposition.Word?.L1?.ToLower()</span>
+                    <span class="pinyin">(@Decomposition.Word?.Pinyin)</span>
+                </MorphPageTitle>
             </div>
         </div>
 
         <MudDivider />
-        <div class="character-decompositions">
-            @foreach (var character in Decomposition.Characters)
-            {
-                <MorphCharacterCard Decomposition="character" />
-            }
-        </div>
+        @if(Decomposition.Characters != null)
+        {
+            <div class="character-decompositions">
+                @foreach (var character in Decomposition.Characters)
+                {
+                    <MorphCharacterCard Decomposition="character" />
+                }
+            </div>
+        }
         <MudDivider />
     }
 </div>

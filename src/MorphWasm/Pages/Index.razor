@@ -8,18 +8,10 @@
 
 <PageTitle>Morph</PageTitle>
 
-<MorphTitle Version="AppVersion" />
-
 <MorphSearchBox OnSearch="OnSearch" />
 
-    @code {
-        private string? AppVersion { get; set; }
+@code {
     private string? Query { get; set; }
-
-    protected override void OnInitialized()
-    {
-        this.AppVersion = typeof(Index).Assembly.GetName().Version?.ToString();
-    }
 
     private void OnSearch(string query)
     {

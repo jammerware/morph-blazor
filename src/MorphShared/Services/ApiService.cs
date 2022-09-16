@@ -31,7 +31,10 @@ namespace MorphShared.Services
             var response = await this._http.GetAsync($"{ApiService.API_ROOT}/{requestUri}");
             response.EnsureSuccessStatusCode();
             var jsonContent = await response.Content.ReadAsStringAsync();
-            var deserialized = JsonSerializer.Deserialize<T>(jsonContent);
+            var deserialized = JsonSerializer.Deserialize<T>(jsonContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
 
             if (deserialized == null)
             {
@@ -48,7 +51,10 @@ namespace MorphShared.Services
             var response = await this._http.PostAsync($"{ApiService.API_ROOT}/{requestUri}", new StringContent(serializedPayload, Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
             var jsonContent = await response.Content.ReadAsStringAsync();
-            var deserialized = JsonSerializer.Deserialize<T>(jsonContent);
+            var deserialized = JsonSerializer.Deserialize<T>(jsonContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
 
             if (deserialized == null)
             {

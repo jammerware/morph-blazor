@@ -8,7 +8,7 @@
         public string[] Definitions { get; set; }
         public int StrokeCount { get; set; }
         public bool IsUnbound { get; set; }
-        public WordFrequency CommonWords { get; set; }
-        public Radical? SemanticRadical { get; set; }
+        public WordFrequency[] CommonWords { get; set; }
+        public SemanticRadical? SemanticRadical { get; set; }
     }
 }

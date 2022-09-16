@@ -47,7 +47,7 @@
 }
 
 .pinyin {
-    color: red;
+    color: var(--mud-palette-info-lighten);
     font-weight: normal;
 }
 

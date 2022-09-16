@@ -3,8 +3,8 @@
     width: 100%;
 }
 
-::deep .search-box input {
-    font-size: 3rem;
+::deep input {
+    font-size: 3rem !important;
 }
 
 ::deep .search-button {

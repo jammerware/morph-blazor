@@ -1,4 +1,5 @@
 ﻿using MorphMaui.Data;
+using MorphMaui.Services;
 using MorphShared;
 using MudBlazor.Services;
 
@@ -20,7 +21,12 @@ namespace MorphMaui
             // builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddScoped<HttpClient>();
             builder.Services.AddMudServices();
-            builder.Services.AddMorphSharedServices();
+
+            // add shared services and platform-specific services
+            builder.Services.AddMorphSharedServices((platformServices) =>
+            {
+                platformServices.AddShareService<ShareService>();
+            });
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
