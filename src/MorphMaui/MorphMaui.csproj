@@ -16,7 +16,7 @@
         <ApplicationTitle>MorphMaui</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.morphmaui</ApplicationId>
+        <ApplicationId>com.jammerware.morph</ApplicationId>
         <ApplicationIdGuid>064CEEB6-DB58-4655-8ED3-786F1A4EAEAF</ApplicationIdGuid>
 
         <!-- Versions -->
@@ -29,6 +29,10 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
+      <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     </PropertyGroup>
 
     <ItemGroup>
