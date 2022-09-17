@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MorphShared;
+using MorphShared.Services;
 using MorphWasm;
 using MorphWasm.Services;
 using MudBlazor.Services;
@@ -16,6 +17,9 @@ builder.Services.AddMorphSharedServices(platformServices =>
 {
     platformServices.AddShareService<ShareService>();
 });
+
+// our services
+builder.Services.AddScoped<IClipboardService, ClipboardService>();
 
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");

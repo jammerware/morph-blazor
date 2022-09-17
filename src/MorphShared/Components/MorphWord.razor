@@ -55,7 +55,12 @@
         <MudDivider />
         
         <div class="button-wrap">
-            <MudIconButton Icon="@Icons.Material.Filled.Share" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Medium" />
+            <MudIconButton 
+                OnClick="OnShareClicked"
+                Icon="@Icons.Material.Filled.Share" 
+                Variant="Variant.Outlined" 
+                Color="Color.Primary" 
+                Size="Size.Medium" />
         </div>
     }
 </div>
@@ -65,6 +70,9 @@
     public string? Word { get; set; }
     private WordDecomposition? Decomposition { get; set; }
 
+    [Parameter]
+    public EventCallback<ShareEventArgs> OnShare { get; set; }
+
     protected async override Task OnInitializedAsync()
     {
         if (Word == null) {
@@ -73,5 +81,10 @@
 
         this.Decomposition = await this.Api.GetWordDecomposition(Word);
         StateHasChanged();
+    }
+
+    private async Task OnShareClicked()
+    {
+        await this.OnShare.InvokeAsync(new ShareEventArgs($"https://morphwasm.azurewebsites.net/word/{this.Word}"));
     }
 }

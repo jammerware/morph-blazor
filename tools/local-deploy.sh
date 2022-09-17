@@ -1,0 +1,2 @@
+# use adb devices -l to find device id
+java -jar bundletool.jar build-apks --bundle ./com.jammerware.morph.aab --output ./com.jammerware.morph.apks --device-spec ./device-spec.json --ks ./debug.keystore --ks-key-alias androiddebug

@@ -54,6 +54,15 @@
     </ItemGroup>
 
     <ItemGroup>
+      <AndroidResource Remove="Tools\**" />
+      <Compile Remove="Tools\**" />
+      <Content Remove="Tools\**" />
+      <EmbeddedResource Remove="Tools\**" />
+      <MauiXaml Remove="Tools\**" />
+      <None Remove="Tools\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\MorphShared\MorphShared.csproj" />
     </ItemGroup>
 

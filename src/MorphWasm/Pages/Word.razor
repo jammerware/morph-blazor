@@ -1,10 +1,20 @@
 ﻿@using MorphShared.Components
+@using MorphShared.Models
+@using MorphShared.Services
+
+@inject IShareService ShareService
+@inject ISnackbar Snackbar;
 
 @page "/word/{wordParameter}"
 
-<MorphWord Word="@WordParameter" />
+<MorphWord Word="@WordParameter" OnShare="OnShare" />
 
 @code {
     [Parameter]
     public string? WordParameter { get; set; }
+
+    private async Task OnShare(ShareEventArgs e) {
+        await this.ShareService.ShareContent(e.Content);
+        this.Snackbar.Add($"Copied a link to your clipboard!");
+    }
 }
