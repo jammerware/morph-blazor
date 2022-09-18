@@ -1,8 +1,4 @@
 const morph = {
-    wait: function (text) {
-        setTimeout(morph.copyText(text), 2000);
-    },
-
     copyText: function (text) {
         navigator.clipboard.writeText(text)
             .then(() => {

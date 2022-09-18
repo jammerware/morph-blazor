@@ -15,7 +15,7 @@ namespace MorphWasm.Services
 
         public async Task Copy(string content)
         {
-            var interopResult = await JSInterop.InvokeAsync<JSInteropResult>("morph.wait", content);
+            var interopResult = await JSInterop.InvokeAsync<JSInteropResult>("morph.copyText", content);
 
             // currently, it seems like JSInterop doesn't wait for the promise to return,
             // making it not possible to meaningfully detect errors from the client script :(
