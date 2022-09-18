@@ -1,5 +1,5 @@
 .body-wrap {
-    background-color: #fafafa;
+    background-color: var(--mud-palette-primary-text);
     border-radius: var(--mud-default-borderradius);
     padding: 16px;
 }

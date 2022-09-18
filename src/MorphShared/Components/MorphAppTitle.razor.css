@@ -1,6 +1,6 @@
 ﻿a.app-title {
-    color: #fafafa;
-    font-family: 'Passion One', 'Segoe UI', sans-serif;
+    color: var(--mud-palette-primary-text);
+    font-family: var(--morph-logo-font);
     font-size: 4rem;
     height: 3rem;
     text-transform: lowercase;
@@ -18,4 +18,8 @@
     font-weight: lighter;
     margin-left: 4px;
     text-transform: uppercase;
+}
+
+a {
+    color: var(--mud-palette-primary-text);
 }

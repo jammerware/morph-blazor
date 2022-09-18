@@ -8,8 +8,9 @@
         Class="search-box"
         AutoFocus="true"
         Variant="Variant.Text"
-        @bind-Value="Query" 
-        @bind-Label="HelpText"
+        @bind-Value="Query"
+        Label="@HelpText"
+        Immediate="true"
         TextChanged="OnTextChanged"
         @onkeyup="OnKeyUp" />
 
@@ -54,8 +55,9 @@
         }
     }
 
-    private void OnTextChanged(string text)
+    private void OnTextChanged()
     {
+        System.Diagnostics.Debug.WriteLine("hi");
         this.IsQueryValid = (this.Query?.Length ?? 0) >= MIN_QUERY_LENGTH;
     }
 

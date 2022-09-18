@@ -2,13 +2,12 @@
 @using MorphShared.Components
 
 <MudThemeProvider />
-<MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.Medium">
-            <MorphAppTitle Version="@AppVersion" />
+            <MorphAppTitle Version="@AppVersion" IsAlpha="true" AboutUrl="/about" />
             <div class="app-wrap">
                 @Body
             </div>
@@ -18,5 +17,5 @@
 </MudLayout>
 
 @code {
-    private string? AppVersion { get; set; } = typeof(MainLayout).Assembly.GetName().Version?.ToString();
+    private string AppVersion { get; set; } = typeof(MainLayout).Assembly.GetName().Version?.ToString();
 }

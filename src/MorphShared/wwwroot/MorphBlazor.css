@@ -1,4 +1,10 @@
-﻿body {
+﻿@import "https://fonts.googleapis.com/css2?family=Passion+One&display=swap";
+
+:root {
+    --morph-logo-font: 'Passion One', 'Segoe UI', sans-serif;
+}
+
+body {
     background: url('background.jpg') center content-box content-box fixed;
     font-family: var(--mud-typography-default-family);
 }

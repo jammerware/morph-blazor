@@ -1,6 +1,19 @@
 ﻿<div class="app-title-wrap">
     <a class="app-title" href="/">Morph</a>
-    <p class="alpha-note">[ <strong>alpha</strong> @Version ]</p>
+    @if (AboutUrl != null)
+    {
+        <p class="alpha-note"><a href="@AboutUrl">[
+            @if (IsAlpha)
+            {
+                <strong>alpha </strong>
+            }
+            @Version 
+        ]</a></p>
+    }
+    else 
+    {
+        <p class="alpha-note">[ <strong>alpha</strong> @Version ]</p>
+    }
 </div>
 
 @code {
@@ -9,4 +22,7 @@
 
     [Parameter]
     public bool IsAlpha { get; set; } = true;
+
+    [Parameter]
+    public string? AboutUrl { get; set; }
 }

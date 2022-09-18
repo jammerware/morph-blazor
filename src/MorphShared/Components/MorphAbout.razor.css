@@ -1,0 +1,27 @@
+﻿a {
+    text-decoration: underline;
+}
+
+ul {
+    margin-top: 1rem;
+    list-style-type: square;  
+}
+
+li {
+    margin: 0.8rem 0 0.8rem 1rem;
+}
+
+h2 {
+    margin: 1rem 0 2rem 0;
+    margin-bottom: 0.2rem;
+}
+
+h2:not(:first-of-type) {
+    margin-top: 2rem;
+}
+
+.app-logo-font {
+    font-family: var(--morph-logo-font);
+    font-size: 2rem;
+    text-transform: lowercase;
+}

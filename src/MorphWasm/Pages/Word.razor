@@ -1,4 +1,6 @@
-﻿@using MorphShared.Components
+﻿@using Microsoft.AspNetCore.Components.Rendering
+
+@using MorphShared.Components
 @using MorphShared.Models
 @using MorphShared.Services
 
@@ -13,8 +15,24 @@
     [Parameter]
     public string? WordParameter { get; set; }
 
+    public MudSnackbarElement Snacky { get; set; } = null;
+
     private async Task OnShare(ShareEventArgs e) {
         await this.ShareService.ShareContent(e.Content);
-        this.Snackbar.Add($"Copied a link to your clipboard!");
+
+        // currently have to change config globally to reposition
+        // tracked by https://github.com/MudBlazor/MudBlazor/issues/2863
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+
+        // compose HTML message. https://github.com/MudBlazor/MudBlazor/issues/3615
+        // suggests enabling renderfragments here, which I kind of like.
+        var content = $"<ul><li><strong>Copied a link to your clipboard!</strong></li><li>{e.Content}</li></ul>";
+
+        //RenderFragment frag = new RenderFragment(builder => {
+        //    builder.AddContent(1, content);
+        //});
+
+        // show snackbar
+        this.Snackbar.Add(content, Severity.Info);
     }
 }

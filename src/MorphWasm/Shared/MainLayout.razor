@@ -2,7 +2,6 @@
 @using MorphShared.Components
 
 <MudThemeProvider />
-<MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
@@ -11,7 +10,7 @@
             <div class="morph-flex-parent vertical-layout">
                 <div class="morph-flex-child"></div>
                 <div class="app-container">
-                    <MorphAppTitle Version="@AppVersion" />
+                    <MorphAppTitle Version="@AppVersion" IsAlpha="true" AboutUrl="/about" />
                     <div class="body-wrap">
                         @Body
                     </div>
