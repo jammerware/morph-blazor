@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Boobs>2022.09.18.1723</Boobs>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,4 +16,7 @@
     <ProjectReference Include="..\MorphShared\MorphShared.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell.exe -ExecutionPolicy Unrestricted -NoProfile -NonInteractive -File $(SolutionDir)..\tools\update-version.ps1 -ProjectDir $(ProjectDir) -ProjectPath $(ProjectPath)" />
+  </Target>
 </Project>

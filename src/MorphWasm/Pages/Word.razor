@@ -24,10 +24,6 @@
         // suggests enabling renderfragments here, which I kind of like.
         var content = $"<ul><li><strong>Copied a link to your clipboard!</strong></li><li>{e.Content}</li></ul>";
 
-        //RenderFragment frag = new RenderFragment(builder => {
-        //    builder.AddContent(1, content);
-        //});
-
         // show snackbar
         this.Snackbar.Add(content, Severity.Info);
     }
