@@ -1,6 +1,10 @@
 ﻿@inherits LayoutComponentBase
 @using MorphShared.Components
 
+@inject IApiService ApiService
+@inject ShakeService ShakeService
+@inject NavigationManager NavManager
+
 <MudThemeProvider />
 <MudSnackbarProvider />
 
@@ -18,4 +22,13 @@
 
 @code {
     private string AppVersion { get; set; } = typeof(MainLayout).Assembly.GetName().Version?.ToString();
+
+    protected override void OnInitialized()
+    {
+        this.ShakeService.ShakeDetected += async (sender, args) =>
+        {
+            var randomTerm = await ApiService.GetRandomRecommendedSearchTerm();
+            NavManager.NavigateTo($"/word/{randomTerm.Term}");
+        };
+    }
 }

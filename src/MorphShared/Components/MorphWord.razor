@@ -7,7 +7,7 @@
 <PageTitle>@Decomposition?.Word?.L1 | Morph</PageTitle>
 
 <div class="word-component">
-    @if (Decomposition == null)
+    @if (IsLoading)
     {
         <MorphLoading>
             <OperationDescription>Looking up <strong>@Word?.ToLower()</strong>...</OperationDescription>
@@ -35,15 +35,15 @@
 
                 <div class="title-wrap">
                     <MorphPageTitle>
-                        <span class="word">@Decomposition.Word?.L1?.ToLower()</span>
-                        <span class="pinyin">(@Decomposition.Word?.Pinyin)</span>
+                        <span class="word">@Decomposition?.Word?.L1?.ToLower()</span>
+                        <span class="pinyin">(@Decomposition?.Word?.Pinyin)</span>
                     </MorphPageTitle>
                 </div>
             </div>
         </div>
 
         <MudDivider />
-        @if(Decomposition.Characters != null)
+        @if(Decomposition?.Characters != null)
         {
             <div class="character-decompositions">
                 @foreach (var character in Decomposition.Characters)
@@ -68,19 +68,35 @@
 @code {
     [Parameter]
     public string? Word { get; set; }
-    private WordDecomposition? Decomposition { get; set; }
 
     [Parameter]
     public EventCallback<ShareEventArgs> OnShare { get; set; }
 
-    protected async override Task OnInitializedAsync()
+    private WordDecomposition? Decomposition { get; set; }
+    private bool IsLoading { get; set; }
+
+    protected override Task OnInitializedAsync()
     {
-        if (Word == null) {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Word == null)
+        {
             throw new ArgumentException($"{nameof(MorphWord)} requires a word argument.");
         }
 
-        this.Decomposition = await this.Api.GetWordDecomposition(Word);
-        StateHasChanged();
+        if (Decomposition == null || Decomposition.Word.L1 != Word)
+        {
+            this.IsLoading = true;
+            StateHasChanged();
+
+            this.Decomposition = await this.Api.GetWordDecomposition(Word);
+            this.IsLoading = false;
+            StateHasChanged();
+        }
+
     }
 
     private async Task OnShareClicked()

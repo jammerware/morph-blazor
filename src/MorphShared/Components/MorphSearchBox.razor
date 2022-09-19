@@ -1,6 +1,8 @@
 ﻿@using System.Threading
 @using MudBlazor
 @using MorphShared.Services
+
+@implements IDisposable
 @inject IApiService Api
 
 <div class="search-box-component">
@@ -32,6 +34,7 @@
     private bool IsQueryValid { get; set; } = false;
     private string[]? RecommendedSearchTerms { get; set; }
     private const int MIN_QUERY_LENGTH = 2;
+    private Timer? _updateTextTimer { get; set; }
 
     [Parameter]
     public EventCallback<string> OnSearch { get; set; }
@@ -41,7 +44,7 @@
         this.RecommendedSearchTerms = await Api.GetRecommendedSearchTerms();
 
         // update the help text every five seconds
-        var updateHelpTextTimer = new Timer(UpdateHelpText, null, 0, 5000);
+        _updateTextTimer = new Timer(UpdateHelpText, null, 0, 5000);
 
         // force button disabled
         StateHasChanged();
@@ -87,4 +90,6 @@
             StateHasChanged();
         });
     }
+
+    public void Dispose() => _updateTextTimer?.Dispose();
 }

@@ -27,6 +27,8 @@ namespace MorphMaui
                 platformServices.AddShareService<ShareService>();
             });
 
+            builder.Services.AddSingleton(provider => ShakeService.Start());
+
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
 #endif

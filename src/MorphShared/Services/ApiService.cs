@@ -20,6 +20,9 @@ namespace MorphShared.Services
         public async Task<WordDecomposition> GetWordDecomposition(string query) =>
             await this.GetResponseContent<WordDecomposition>($"decomposition/{query}");
 
+        public async Task<RecommendedSearchTerm> GetRandomRecommendedSearchTerm() =>
+            await this.GetResponseContent<RecommendedSearchTerm>("decomposition/get-random");
+
         public async Task<string[]> GetRecommendedSearchTerms() =>
             await this.GetResponseContent<string[]>("recommended-search-terms");
 
