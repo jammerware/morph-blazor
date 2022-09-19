@@ -21,19 +21,22 @@
             </div>
             <div class="other-info morph-flex-child">
                 <ul class="fact-list">
-                    <li>
-                        <h1 class="fact-header">Meanings</h1>
-                        <div>
-                            <ul class="flex-list">
-                                @foreach(var definition in Character.Definitions)
-                                {
-                                    <li>@definition</li>
-                                }
-                            </ul>
-                        </div>
-                    </li>
+                    @if (Character.Definitions != null)
+                    {
+                        <li>
+                            <h1 class="fact-header">Meanings</h1>
+                            <div>
+                                <ul class="flex-list">
+                                    @foreach(var definition in Character.Definitions)
+                                    {
+                                        <li>@definition</li>
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    }
 
-                    @if (CommonWords != null)
+                    @if (CommonWords?.Translations != null)
                     {
                         <li>
                             <h1 class="fact-header">Common words</h1>
@@ -113,7 +116,7 @@
 
 @code {
     [Parameter]
-    public string CharacterParameter { get; set; } = "";
+    public string? CharacterParameter { get; set; } = "";
 
     private CharacterDecomposition? Character { get; set; }
     private TranslationResults? CommonWords { get; set; }
@@ -125,12 +128,23 @@
         this.CommonWords = null;
         StateHasChanged();
 
-        this.Character = await this.Api.GetCharacterDetails(this.CharacterParameter.ToString());
-        this.FrequencyRankSuffix = this.Character == null ? "th" : this.FrequencyRankService.GetFrequencyRankSuffix(this.Character.FreqRank);
+        if (!string.IsNullOrEmpty(CharacterParameter))
+        {
+            this.Character = await this.Api.GetCharacterDetails(this.CharacterParameter.ToString());
+            this.FrequencyRankSuffix = this.Character == null ? "th" : this.FrequencyRankService.GetFrequencyRankSuffix(this.Character.FreqRank);
 
-        if (this.Character != null && this.Character.CommonWords != null) {
-            var toTranslate = this.Character.CommonWords.Select(w => w.Word).ToArray();
-            this.CommonWords = await this.Api.Translate(this.Character.CommonWords.Select(w => w.Word).ToArray());
+            var toTranslate = this.Character?
+                .CommonWords?
+                .Select(w => w.Word ?? string.Empty)
+                .Where(s => s != string.Empty)
+                .ToArray();
+
+            if (toTranslate != null) {
+                this.CommonWords = await this.Api.Translate(toTranslate);
+            }
+        }
+        else {
+            throw new ArgumentException($"{nameof(MorphCharacter)} requires a string {nameof(CharacterParameter)}.");
         }
     }
 }

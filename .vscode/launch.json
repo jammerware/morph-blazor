@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Webapp",
+            "type": "blazorwasm",
+            "request": "launch",
+            "url": "https://localhost:5179"
+        }
+    ]
+}

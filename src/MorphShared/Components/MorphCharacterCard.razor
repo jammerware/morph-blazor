@@ -16,15 +16,19 @@
                         </p>
                         <p class="pinyin">@Decomposition.Pinyin</p>
                     </div>
-                    <div class="definitions">
-                        <ul>
-                            @foreach (var definition in Decomposition.Definitions)
-                            {
-                                <li>@definition</li>
-                            }
-                        </ul>
-                    </div>
 
+                    @if (Decomposition.Definitions != null)
+                    {
+                        <div class="definitions">
+                            <ul>
+                                @foreach (var definition in Decomposition.Definitions)
+                                {
+                                    <li>@definition</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    
                     <ul class="frequency-and-strokes">
                         <li><strong>@Decomposition.FreqRank@(FrequencyRankSuffix)</strong> most common character</li>
                         <li><strong>@Decomposition.StrokeCount</strong> strokes</li>

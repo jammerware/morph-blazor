@@ -75,11 +75,6 @@
     private WordDecomposition? Decomposition { get; set; }
     private bool IsLoading { get; set; }
 
-    protected override Task OnInitializedAsync()
-    {
-        return Task.CompletedTask;
-    }
-
     protected override async Task OnParametersSetAsync()
     {
         if (Word == null)
@@ -87,7 +82,7 @@
             throw new ArgumentException($"{nameof(MorphWord)} requires a word argument.");
         }
 
-        if (Decomposition == null || Decomposition.Word.L1 != Word)
+        if (Decomposition?.Word?.L1 != Word)
         {
             this.IsLoading = true;
             StateHasChanged();

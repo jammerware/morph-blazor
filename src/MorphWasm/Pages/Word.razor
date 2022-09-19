@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components.Rendering
-
-@using MorphShared.Components
+﻿@using MorphShared.Components
 @using MorphShared.Models
 @using MorphShared.Services
 
@@ -15,13 +13,13 @@
     [Parameter]
     public string? WordParameter { get; set; }
 
-    public MudSnackbarElement Snacky { get; set; } = null;
-
     private async Task OnShare(ShareEventArgs e) {
         await this.ShareService.ShareContent(e.Content);
 
-        // compose HTML message. https://github.com/MudBlazor/MudBlazor/issues/3615
+        // compose HTML message. 
+        // https://github.com/MudBlazor/MudBlazor/issues/3615
         // suggests enabling renderfragments here, which I kind of like.
+        // update: I'm actually working on this myself! https://github.com/MudBlazor/MudBlazor/pull/5295
         var content = $"<ul><li><strong>Copied a link to your clipboard!</strong></li><li>{e.Content}</li></ul>";
 
         // show snackbar
