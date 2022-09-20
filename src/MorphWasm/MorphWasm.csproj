@@ -20,6 +20,11 @@
     <ProjectReference Include="..\MorphShared\MorphShared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="Properties\ServiceDependencies\" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="powershell.exe -ExecutionPolicy Unrestricted -NoProfile -NonInteractive -File $(SolutionDir)..\tools\update-version.ps1 -ProjectDir $(ProjectDir) -ProjectPath $(ProjectPath)" />
   </Target>
