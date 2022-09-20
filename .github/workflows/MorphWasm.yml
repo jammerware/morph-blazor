@@ -19,7 +19,7 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
     - name: Add WASM workload
-      run: dotnet workload restore --project ${{ env. WORKING_DIRECTORY }}
+      run: dotnet workload restore --project ${{ env. WORKING_DIRECTORY }}/MorphWasm.csproj
     - name: Restore
       run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
     - name: Build
