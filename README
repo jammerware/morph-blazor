@@ -1,0 +1,3 @@
+# Morph: Explore words and characters in Chinese
+
+[![Build and deploy .NET Core application to Azure](https://github.com/jammerware/morph-blazor/actions/workflows/MorphWasm.yml/badge.svg)](https://github.com/jammerware/morph-blazor/actions/workflows/MorphWasm.yml)
