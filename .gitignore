@@ -4,3 +4,7 @@ obj
 
 # publish stuff
 *.pubxml.user
+
+# built resources
+tools/*.aab
+tools/*.apks
