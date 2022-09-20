@@ -17,9 +17,9 @@
         await this.ShareService.ShareContent(e.Content);
 
         // compose HTML message. 
-        // https://github.com/MudBlazor/MudBlazor/issues/3615
+        // https://github.com/MudBlazor/MudBlazor/issues/974
         // suggests enabling renderfragments here, which I kind of like.
-        // update: I'm actually working on this myself! https://github.com/MudBlazor/MudBlazor/pull/5295
+        // update: I'm actually working on this myself! https://github.com/MudBlazor/MudBlazor/pull/5307
         var content = $"<ul><li><strong>Copied a link to your clipboard!</strong></li><li>{e.Content}</li></ul>";
 
         // show snackbar
