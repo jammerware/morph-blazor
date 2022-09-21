@@ -58,7 +58,7 @@
         <div class="button-wrap">
             @if(Decomposition?.Word?.Translation != null)
             {
-                <MudTooltip Text="Copy characters">
+                <MudTooltip Text="Copy characters" Arrow="true" Placement="Placement.Top">
                     <MudIconButton 
                         OnClick="() => OnCopyClicked(Decomposition.Word.Translation)"
                         Icon="@Icons.Material.Filled.FileCopy"
@@ -69,7 +69,7 @@
 
             @if (Decomposition?.Word?.Pinyin != null)
             {
-                <MudTooltip Text="Copy Pinyin">
+                <MudTooltip Text="Copy Pinyin" Arrow="true" Placement="Placement.Top">
                     <MudIconButton 
                         OnClick="() => OnCopyClicked(Decomposition.Word.Pinyin)"
                         Icon="@Icons.Material.Filled.ContentCopy"
@@ -80,7 +80,7 @@
 
             @if (Decomposition?.Word?.L1 != null)
             {
-                <MudTooltip Text="View on Google Translate">
+                <MudTooltip Text="View on Google Translate" Arrow="true" Placement="Placement.Top">
                     <MudIconButton 
                         Href="@($"https://translate.google.com/?sl=en&tl=zh-CN&text={WebUtility.UrlEncode(Decomposition.Word.L1)}&op=translate")"
                         Target="_blank"
@@ -89,8 +89,8 @@
                         Size="Size.Medium" />
                 </MudTooltip>
             }
-            
-            <MudTooltip Text="Share">
+
+            <MudTooltip Text="Share" Arrow="true" Placement="Placement.Top">
                 <MudIconButton 
                     OnClick="OnShareClicked"
                     Icon="@Icons.Material.Filled.Share"
@@ -102,14 +102,18 @@
 </div>
 
 @code {
+
     [Parameter]
-    public string? Word { get; set; }
+    public bool HideTooltips { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<MorphShared.Models.ClipboardEventArgs> OnCopyRequest { get; set; }
 
     [Parameter]
     public EventCallback<ShareEventArgs> OnShare { get; set; }
 
     [Parameter]
-    public EventCallback<MorphShared.Models.ClipboardEventArgs> OnCopyRequest { get; set; }
+    public string? Word { get; set; }
 
     private WordDecomposition? Decomposition { get; set; }
     private bool IsLoading { get; set; }
