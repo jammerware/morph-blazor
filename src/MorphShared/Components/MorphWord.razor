@@ -4,7 +4,6 @@
 @using MudBlazor
 
 @inject IApiService Api
-@inject IClipboardService Clipboard
 
 <PageTitle>@Decomposition?.Word?.L1 | Morph</PageTitle>
 
@@ -57,7 +56,6 @@
         <MudDivider />
         
         <div class="button-wrap">
-
             @if(Decomposition?.Word?.Translation != null)
             {
                 <MudTooltip Text="Copy characters">
@@ -110,6 +108,9 @@
     [Parameter]
     public EventCallback<ShareEventArgs> OnShare { get; set; }
 
+    [Parameter]
+    public EventCallback<MorphShared.Models.ClipboardEventArgs> OnCopyRequest { get; set; }
+
     private WordDecomposition? Decomposition { get; set; }
     private bool IsLoading { get; set; }
 
@@ -133,10 +134,8 @@
     }
 
     private async Task OnCopyClicked(string text)
-    {
-        await Clipboard.Copy(text);
-    }
+        => await OnCopyRequest.InvokeAsync(new Models.ClipboardEventArgs(text));
 
     private async Task OnShareClicked()
-        => await this.OnShare.InvokeAsync(new ShareEventArgs($"https://morphwasm.azurewebsites.net/word/{this.Word}"));
+        => await OnShare.InvokeAsync(new ShareEventArgs($"https://morphwasm.azurewebsites.net/word/{this.Word}"));
 }

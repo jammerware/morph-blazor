@@ -19,7 +19,7 @@
         <ApplicationIdGuid>064CEEB6-DB58-4655-8ED3-786F1A4EAEAF</ApplicationIdGuid>
 
         <!-- Versions -->
-        <ApplicationDisplayVersion>2022.09.20.0707</ApplicationDisplayVersion>
+        <ApplicationDisplayVersion>0.9.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
@@ -28,10 +28,20 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+        <DefaultLanguage>en-US</DefaultLanguage>
+        <Copyright>Copyright © Ben Stein 2022</Copyright>
+        <PackageProjectUrl>https://github.com/jammerware/morphblazor</PackageProjectUrl>
+        <PackageIcon>app-icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/jammerware/morphblazor</RepositoryUrl>
+        <PackageTags>chinese;education;dictionary</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-android|AnyCPU'">
       <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-android|AnyCPU'">
+      <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     </PropertyGroup>
 
     <ItemGroup>
@@ -62,14 +72,26 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="Platforms\Windows\Assets\Splash.scale-100.png" />
+      <None Remove="Platforms\Windows\Assets\Splash.scale-125.png" />
+      <None Remove="Platforms\Windows\Assets\Splash.scale-150.png" />
+      <None Remove="Platforms\Windows\Assets\Splash.scale-200.png" />
+      <None Remove="Platforms\Windows\Assets\Splash.scale-400.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Platforms\Windows\Assets\Splash.scale-100.png" />
+      <Content Include="Platforms\Windows\Assets\Splash.scale-125.png" />
+      <Content Include="Platforms\Windows\Assets\Splash.scale-150.png" />
+      <Content Include="Platforms\Windows\Assets\Splash.scale-200.png" />
+      <Content Include="Platforms\Windows\Assets\Splash.scale-400.png" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\MorphShared\MorphShared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="mudblazor" Version="6.0.15" />
     </ItemGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="powershell.exe -ExecutionPolicy Unrestricted -NoProfile -NonInteractive -File $(SolutionDir)..\tools\update-version.ps1 -ProjectDir $(ProjectDir) -ProjectPath $(ProjectPath) -VersionElement ApplicationDisplayVersion" />
-    </Target>
 </Project>

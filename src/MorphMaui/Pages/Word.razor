@@ -7,14 +7,15 @@
 
 @page "/word/{wordParameter}"
 
-<MorphWord Word="@WordParameter" OnShare="OnShare" />
+<MorphWord Word="@WordParameter" OnCopyRequest="OnCopyRequest" OnShare="OnShare" />
 
 @code {
     [Parameter]
     public string WordParameter { get; set; }
 
+    private async Task OnCopyRequest(MorphShared.Models.ClipboardEventArgs args)
+        => await Clipboard.Default.SetTextAsync(args.Content);
+
     private async Task OnShare(ShareEventArgs e)
-    {
-        await this.ShareService.ShareContent(e.Content);
-    }
+        => await this.ShareService.ShareContent(e.Content);
 }

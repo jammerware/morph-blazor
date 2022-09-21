@@ -59,21 +59,13 @@
     }
 
     private void OnTextChanged()
-    {
-        System.Diagnostics.Debug.WriteLine("hi");
-        this.IsQueryValid = (this.Query?.Length ?? 0) >= MIN_QUERY_LENGTH;
-    }
+        => this.IsQueryValid = (this.Query?.Length ?? 0) >= MIN_QUERY_LENGTH;
 
     private async Task OnButtonClick()
-    {
-        await this.RaiseSearchEvent();
-    }
+        => await this.RaiseSearchEvent();
 
     private async Task RaiseSearchEvent()
-    {
-        System.Diagnostics.Debug.WriteLine("raise with query " + this.Query);
-        await this.OnSearch.InvokeAsync(this.Query);
-    }
+        => await this.OnSearch.InvokeAsync(this.Query);
 
     private async void UpdateHelpText(object? state) 
     {
