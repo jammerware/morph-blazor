@@ -1,8 +1,10 @@
-﻿@using MorphShared.Models
+﻿@using System.Net
+@using MorphShared.Models
 @using MorphShared.Services
 @using MudBlazor
 
 @inject IApiService Api
+@inject IClipboardService Clipboard
 
 <PageTitle>@Decomposition?.Word?.L1 | Morph</PageTitle>
 
@@ -55,12 +57,48 @@
         <MudDivider />
         
         <div class="button-wrap">
-            <MudIconButton 
-                OnClick="OnShareClicked"
-                Icon="@Icons.Material.Filled.Share" 
-                Variant="Variant.Outlined" 
-                Color="Color.Primary" 
-                Size="Size.Medium" />
+
+            @if(Decomposition?.Word?.Translation != null)
+            {
+                <MudTooltip Text="Copy characters">
+                    <MudIconButton 
+                        OnClick="() => OnCopyClicked(Decomposition.Word.Translation)"
+                        Icon="@Icons.Material.Filled.FileCopy"
+                        Color="Color.Primary"
+                        Size="Size.Medium" />
+                </MudTooltip>
+            }
+
+            @if (Decomposition?.Word?.Pinyin != null)
+            {
+                <MudTooltip Text="Copy Pinyin">
+                    <MudIconButton 
+                        OnClick="() => OnCopyClicked(Decomposition.Word.Pinyin)"
+                        Icon="@Icons.Material.Filled.ContentCopy"
+                        Color="Color.Primary"
+                        Size="Size.Medium" />
+                </MudTooltip>
+            }
+
+            @if (Decomposition?.Word?.L1 != null)
+            {
+                <MudTooltip Text="View on Google Translate">
+                    <MudIconButton 
+                        Href="@($"https://translate.google.com/?sl=en&tl=zh-CN&text={WebUtility.UrlEncode(Decomposition.Word.L1)}&op=translate")"
+                        Target="_blank"
+                        Icon="@Icons.Material.Filled.Translate"
+                        Color="Color.Primary"
+                        Size="Size.Medium" />
+                </MudTooltip>
+            }
+            
+            <MudTooltip Text="Share">
+                <MudIconButton 
+                    OnClick="OnShareClicked"
+                    Icon="@Icons.Material.Filled.Share"
+                    Color="Color.Primary"
+                    Size="Size.Medium" />
+            </MudTooltip>
         </div>
     }
 </div>
@@ -94,8 +132,11 @@
 
     }
 
-    private async Task OnShareClicked()
+    private async Task OnCopyClicked(string text)
     {
-        await this.OnShare.InvokeAsync(new ShareEventArgs($"https://morphwasm.azurewebsites.net/word/{this.Word}"));
+        await Clipboard.Copy(text);
     }
+
+    private async Task OnShareClicked()
+        => await this.OnShare.InvokeAsync(new ShareEventArgs($"https://morphwasm.azurewebsites.net/word/{this.Word}"));
 }
