@@ -3,3 +3,7 @@
     border-radius: 4px;
     padding: 16px;
 }
+
+.drawer-button .mud-icon-button {
+    color: var(--mud-palette-primary-text) !important;
+}

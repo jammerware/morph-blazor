@@ -6,9 +6,22 @@
 @inject NavigationManager NavManager
 
 <MudThemeProvider />
-<MudSnackbarProvider />
 
 <MudLayout>
+    <MudDrawer @bind-Open="@DrawerOpen" Elevation="1" Variant="@DrawerVariant.Responsive">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Morph</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            <MudNavLink Href="/">Search</MudNavLink>
+            <MudNavLink Href="/settings">Settings</MudNavLink>
+            <MudNavLink Href="/about">About</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <div class="drawer-button">
+        <MudIconButton OnClick="ToggleDrawer"
+            Icon="@(DrawerOpen ? Icons.Material.Filled.MenuOpen : Icons.Material.Filled.Menu)" />
+    </div>
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.Medium">
             <MorphAppTitle Version="@AppVersion" IsAlpha="true" AboutUrl="/about" />
@@ -21,7 +34,13 @@
 </MudLayout>
 
 @code {
-    private string AppVersion { get; set; } = typeof(MainLayout).Assembly.GetName().Version?.ToString();
+    private string AppVersion { get; set; } = AppInfo.VersionString;
+    private bool DrawerOpen { get; set; } = false;
+
+    private void ToggleDrawer()
+    {
+        DrawerOpen = !DrawerOpen;
+    }
 
     protected override void OnInitialized()
     {
