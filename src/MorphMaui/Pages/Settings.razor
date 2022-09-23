@@ -1,0 +1,26 @@
+﻿@inject ISecureStorage Storage
+
+@page "/settings"
+@inject SettingsService SettingsService
+
+<MudText Typo="Typo.h6">Settings</MudText>
+
+<MudSwitch T="bool" @bind-Checked="Value" Color="Color.Primary">Enable shake to see a random word</MudSwitch>
+
+@code {
+    private bool _value = false;
+    private bool Value 
+    {
+        get { return _value; } 
+        set
+        {
+            _value = value;
+            Storage.SetAsync("enableShake", value.ToString()).Wait();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        _value = SettingsService.EnableShake;
+    }
+}

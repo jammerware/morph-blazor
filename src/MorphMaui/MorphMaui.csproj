@@ -94,4 +94,6 @@
     <ItemGroup>
       <PackageReference Include="mudblazor" Version="6.0.15" />
     </ItemGroup>
+
+    <ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMorphMauiHideInfoBar="True" XamarinHotReloadGenericExceptionInfoBarMorphMauiHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 </Project>

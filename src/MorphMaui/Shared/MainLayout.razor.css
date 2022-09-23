@@ -4,6 +4,10 @@
     padding: 16px;
 }
 
-.drawer-button .mud-icon-button {
+.mud-icon-button path {
     color: var(--mud-palette-primary-text) !important;
+}
+
+.drawer-logo {
+    font-family: var(--morph-logo-font) !important;
 }

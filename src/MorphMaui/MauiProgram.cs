@@ -19,6 +19,8 @@ namespace MorphMaui
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddScoped<HttpClient>();
             builder.Services.AddMudServices();
+            builder.Services.AddSingleton(provider => SecureStorage.Default);
+            builder.Services.AddSingleton<Task<SettingsService>>(async provider => await SettingsService.Create(SecureStorage.Default));
 
             // add shared services and platform-specific services
             builder.Services.AddMorphSharedServices((platformServices) =>
@@ -32,7 +34,10 @@ namespace MorphMaui
             builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
 
-            return builder.Build();
+            var buildThing = builder.Build();
+            Console.Write("yo");
+
+            return buildThing;
         }
     }
 }
