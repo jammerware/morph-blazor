@@ -133,14 +133,18 @@
             this.Character = await this.Api.GetCharacterDetails(this.CharacterParameter.ToString());
             this.FrequencyRankSuffix = this.Character == null ? "th" : this.FrequencyRankService.GetFrequencyRankSuffix(this.Character.FreqRank);
 
-            var toTranslate = this.Character?
+            if (Character?.CommonWords?.Length > 0)
+            {
+                var toTranslate = this.Character?
                 .CommonWords?
                 .Select(w => w.Word ?? string.Empty)
                 .Where(s => s != string.Empty)
                 .ToArray();
 
-            if (toTranslate != null) {
-                this.CommonWords = await this.Api.Translate(toTranslate);
+                if (toTranslate != null)
+                {
+                    this.CommonWords = await this.Api.Translate(toTranslate);
+                }
             }
         }
         else {
